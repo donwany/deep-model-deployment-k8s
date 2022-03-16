@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-model-app
+  namespace: fraud
+  labels:
+    app: prod
+    team: datascience
+    model: IR
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-model-app
+  template:
+    metadata:
+      labels:
+        app: image-model-app
+    spec:
+      containers:
+        - name: image-model-app
+          image: worldbosskafka/image-model-app:1.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
